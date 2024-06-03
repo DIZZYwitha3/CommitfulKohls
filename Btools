@@ -1,0 +1,772 @@
+(function()
+local movestatus = false
+local Player = game.Players.LocalPlayer
+local PlayerService = game.Players
+local Mouse = Player:GetMouse()
+
+local BtoolsParts = {
+  ["Deleted"] = {},
+  ["Moved"] = {},
+  ["Colors"] = {}
+}
+local ClonedToMove = {}
+
+local Kohls = workspace.Terrain:WaitForChild("_Game")
+local Map = Kohls:WaitForChild("Workspace")
+local Jails = Kohls:WaitForChild("Folder")
+local Admin = Kohls:WaitForChild("Admin")
+local Pads = Admin:WaitForChild("Pads"):GetChildren()
+local PermPad = Pads[math.random(1, #Pads)]
+
+local function act(msg)
+  game.Players:Chat(msg)
+end
+
+local function fwait()
+  task.wait()
+end
+
+local function allclear()
+  if workspace:FindFirstChild(Player.Name) and game:GetService("MarketplaceService"):UserOwnsGamePassAsync(Player.UserId, 66254) and workspace:FindFirstChild(Player.Name) and workspace:FindFirstChild(Player.Name):FindFirstChild("Humanoid") and workspace:FindFirstChild(Player.Name):FindFirstChild("Humanoid").Health > 0 then
+    return true
+  elseif workspace:FindFirstChild(Player.Name) and Admin.Pads:FindFirstChild(Player.Name .. "'s admin") and workspace:FindFirstChild(Player.Name) and workspace:FindFirstChild(Player.Name):FindFirstChild("Humanoid") and workspace:FindFirstChild(Player.Name):FindFirstChild("Humanoid").Health > 0 then
+    return true
+  else
+    movestatus = false
+    return false
+  end
+end
+
+
+local function attach(part)
+  if Player.Character.Torso:FindFirstChild("Weld") then
+    Player.Character.Torso:FindFirstChild("Weld"):Destroy()
+  end
+  PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+  local looping = true
+  task.spawn(function()
+  if Player.Character.Torso:FindFirstChild("Weld") then
+    Player.Character.Torso:FindFirstChild("Weld"):Destroy()
+  end
+  while true do
+    fwait()
+    if allclear() == true then
+      PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+      Player.Character.HumanoidRootPart.CFrame = part.CFrame * CFrame.new(-1*(part.Size.X/2)-(Player.Character.HumanoidRootPart.Size.X/2),0,0)
+    elseif allclear() == false then
+
+      looping = false
+    end
+    if looping == false then break end
+  end
+  end)
+  task.spawn(function()
+  while looping do
+    fwait()
+    act("unpunish me")
+    if allclear() == false then
+
+      looping = false
+    end
+    if looping == false then break end
+  end
+  end)
+
+  repeat fwait() Player.Character.HumanoidRootPart.CFrame = part.CFrame * CFrame.new(-1*(part.Size.X/2)-(Player.Character.HumanoidRootPart.Size.X/2),0,0)
+  until Player.Character.HumanoidRootPart.CFrame == part.CFrame * CFrame.new(-1*(part.Size.X/2)-(Player.Character.HumanoidRootPart.Size.X/2),0,0)
+  repeat
+    fwait()
+    if allclear() == false then
+      break
+    end
+  until
+  Player.Character.Torso:FindFirstChild("Weld")
+  looping = false
+end
+
+local function btoolsmove(part, clonepart)
+  print('now moving', part, clonepart)
+  local loop = false
+  print(movestatus)
+  if movestatus == false then
+    print('okkkk')
+    task.wait()
+    print('size')
+    act("size me .5")
+    print('sized')
+    workspace.Gravity = 0
+    movestatus = true
+    act("gear me 0000000000000000000000000000000000000108158379")
+    repeat fwait() print('waiting') until Player.Backpack:FindFirstChild("IvoryPeriastron")
+      Player.Backpack:FindFirstChild("IvoryPeriastron").Parent = Player.Character
+      local ivory = Player.Character:FindFirstChild("IvoryPeriastron")
+      local newcoord = clonepart.CFrame
+      loop = true
+      task.spawn(function()
+      while loop do
+        fwait()
+        if Player.Character.Torso:FindFirstChild("Weld") then
+          Player.Character.Torso:FindFirstChild("Weld"):Destroy()
+        end
+        PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+        Player.Character.HumanoidRootPart.CFrame = newcoord * CFrame.new(-1*(clonepart.Size.X/2)-(Player.Character.HumanoidRootPart.Size.X/2),0,0)
+      end
+      end)
+      task.wait(.25)
+      loop = false
+      if not Player.Character:FindFirstChild("IvoryPeriastron") then
+
+        movestatus = false
+        return
+      end
+      ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+      task.wait(.25)
+      attach(part)
+      task.wait(.25)
+      if not Player.Character:FindFirstChild("IvoryPeriastron") then
+
+        movestatus = false
+        return
+      end
+      ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+      task.wait(.25)
+      movestatus = false
+    end
+  end
+
+  local ogcframes
+  if not shared.KAHPartsTable then
+    shared.KAHPartsTable = loadstring(game:HttpGet('https://raw.githubusercontent.com/quivings/resources/main/KAHPartsTable'))()
+  end
+  ogcframes = shared.KAHPartsTable
+  local function moveobject(part, o)
+    if movestatus == false then
+      movestatus = true
+      if o == 1 then
+        if allclear() == true then
+          task.wait()
+          workspace.Gravity = 0
+          act("size me .5")
+          workspace.FallenPartsDestroyHeight = 0/0
+          act("gear me 0000000000000000000000000000000000000108158379")
+          repeat fwait() until Player.Backpack:FindFirstChild("IvoryPeriastron")
+            Player.Character.Humanoid:EquipTool(Player.Backpack:FindFirstChild("IvoryPeriastron"))
+            local ivory = Player.Character:FindFirstChild("IvoryPeriastron")
+            local randcoord = CFrame.new(math.random(-30593, -23388), math.random(-30593, -10455), math.random(-30593, -10455))
+            Player.Character.HumanoidRootPart.CFrame = randcoord
+            PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+            if Player.Character.Torso:FindFirstChild("Weld") then
+              Player.Character.Torso:FindFirstChild("Weld"):Destroy()
+            end
+            task.wait(.25)
+            if not Player.Character:FindFirstChild("IvoryPeriastron") then
+              movestatus = false
+              return
+            end
+            ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+            task.wait(.25)
+            attach(part)
+            task.wait(.25)
+            if not Player.Character:FindFirstChild("IvoryPeriastron") then
+              fixgame()
+              forcerespawn()
+              movestatus = false
+              return
+            end
+            ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+            task.wait(.25)
+            movestatus = false
+          else
+
+          end
+        elseif o == 2 then
+          local loop = false
+          if allclear() == true then
+            removelimbs()
+            task.wait()
+            act("size me .5")
+            workspace.Gravity = 0
+            workspace.FallenPartsDestroyHeight = 0/0
+            act("gear me 0000000000000000000000000000000000000108158379")
+            repeat fwait() until Player.Backpack:FindFirstChild("IvoryPeriastron")
+              Player.Character.Humanoid:EquipTool(Player.Backpack:FindFirstChild("IvoryPeriastron"))
+              local ivory = Player.Character:FindFirstChild("IvoryPeriastron")
+              local newcoord = CFrame.new(ogcframes[part.Name][1],ogcframes[part.Name][2],ogcframes[part.Name][3],ogcframes[part.Name][4],ogcframes[part.Name][5],ogcframes[part.Name][6],ogcframes[part.Name][7],ogcframes[part.Name][8],ogcframes[part.Name][9],ogcframes[part.Name][10],ogcframes[part.Name][11],ogcframes[part.Name][12]) * CFrame.new(-1*(part.Size.X/2)-(Player.Character.HumanoidRootPart.Size.X/2),0,0)
+              loop = true
+              task.spawn(function()
+              while loop do
+                fwait()
+                Player.Character.HumanoidRootPart.CFrame = newcoord
+                if loop == false then break end
+              end
+              end)
+              repeat fwait()
+              until Player.Character.HumanoidRootPart.CFrame == newcoord
+              loop = false
+              if Player.Character.Torso:FindFirstChild("Weld") then
+                Player.Character.Torso:FindFirstChild("Weld"):Destroy()
+              end
+              PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+              task.wait(.25)
+              if not Player.Character:FindFirstChild("IvoryPeriastron") then
+                fixgame()
+                forcerespawn()
+                movestatus = false
+                return
+              end
+              ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+              task.wait(.25)
+              attach(part)
+              task.wait(.25)
+              if not Player.Character:FindFirstChild("IvoryPeriastron") then
+                fixgame()
+                forcerespawn()
+                movestatus = false
+                return
+              end
+              ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+              task.wait(.25)
+              movestatus = false
+            else
+              loop = false
+
+            end
+          elseif o == 3 then
+            if allclear() == true then
+              removelimbs()
+              task.wait()
+              act("size me .5")
+              workspace.Gravity = 0
+              workspace.FallenPartsDestroyHeight = 0/0
+              act("gear me 0000000000000000000000000000000000000108158379")
+              repeat fwait() until Player.Backpack:FindFirstChild("IvoryPeriastron")
+                Player.Character.Humanoid:EquipTool(Player.Backpack:FindFirstChild("IvoryPeriastron"))
+                local ivory = Player.Character:FindFirstChild("IvoryPeriastron")
+                local randcoord = CFrame.new(0, math.random(-14950, -15000), 0)
+                Player.Character.HumanoidRootPart.CFrame = randcoord
+                if Player.Character.Torso:FindFirstChild("Weld") then
+                  Player.Character.Torso:FindFirstChild("Weld"):Destroy()
+                end
+                PlayerService.LocalPlayer.Character.HumanoidRootPart.Velocity = Vector3.new(0, 0, 0)
+                task.wait(.25)
+                if not Player.Character:FindFirstChild("IvoryPeriastron") then
+                  fixgame()
+                  forcerespawn()
+                  movestatus = false
+                  return
+                end
+                ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+                task.wait(.05)
+                attach(part)
+                task.wait(.05)
+                if not Player.Character:FindFirstChild("IvoryPeriastron") then
+                  fixgame()
+                  forcerespawn()
+                  movestatus = false
+                  return
+                end
+                ivory:WaitForChild("Remote"):FireServer(Enum.KeyCode.E)
+                task.wait(.25)
+                movestatus = false
+              else
+
+                forcerespawn()
+                fixgame()
+              end
+            end
+          end
+        end
+
+
+        local SelectBox = Instance.new("SelectionBox", Player)
+        local Handles = Instance.new("Handles", Player)
+
+        local Lasso = Instance.new("SelectionPartLasso")
+        local ArcHandle = Instance.new("ArcHandles")
+
+        local Move = Instance.new("Tool", Player.Backpack)
+        local Delete = Instance.new("Tool", Player.Backpack)
+        local Rotate = Instance.new("Tool", Player.Backpack)
+        local Undo = Instance.new("Tool", Player.Backpack)
+        local Finish = Instance.new("Tool", Player.Backpack)
+
+        local md = false
+
+        local target
+        local opticalpart
+
+        Move.Name = "Move"
+        Move.RequiresHandle = false
+
+        Delete.Name = "Delete"
+        Delete.RequiresHandle = false
+
+        Rotate.Name = "Rotate"
+        Rotate.RequiresHandle = false
+
+        Undo.Name = "Undo"
+        Undo.RequiresHandle = false
+
+        Finish.Name = "Finish"
+        Finish.RequiresHandle = false
+
+        local function IsDescendantOfPlayer(part)
+          for i,v in pairs(PlayerService:GetPlayers()) do
+            if v:FindFirstChild("Character") and part:IsDescendantOf(v.Character) then
+              return true
+            else
+              return false
+            end
+          end
+        end
+
+        local function IsInTable(part, tbl)
+          if tbl[part] or table.find(tbl, part) then
+            return true
+          end
+        end
+
+        local function IsBeingMoved(part)
+          if IsInTable(part, BtoolsParts.Deleted) then
+            print("This part is being deleted. Use undo tool to undo!")
+            return true,1
+          elseif not IsInTable(part, BtoolsParts.Moved) and not string.find(part.Name, "(Clone)") then
+            return false,2
+          elseif IsInTable(part, BtoolsParts.Moved) and not string.find(part.Name, "(Clone)") then
+            print("This part is already being moved!")
+            return true,3
+          elseif string.find(part.Name, "(Clone)") then
+            return true,4
+          elseif IsInTable(part, BtoolsParts.Deleted)  then
+            print("This part is being deleted, use undo tool to undo!")
+            return true,1
+          end
+        end
+
+        local MACon
+
+        Move.Equipped:Connect(function()
+        MACon = Move.Activated:Connect(function()
+        selection = Mouse.Target
+        if selection and selection:IsA("Part") and not IsDescendantOfPlayer(selection) and selection ~= Handles then
+          local newpart
+          local IsPartBeingMoved,t = IsBeingMoved(selection)
+          if not IsPartBeingMoved then
+            newpart = selection:Clone()
+            newpart.CanCollide = false
+            newpart.Parent = workspace
+            newpart.Transparency = 0.5
+            newpart.Name = newpart.Name .. " (Clone)"
+            BtoolsParts.Moved[selection] = {
+              ClonePart = newpart,
+              Part = selection
+            }
+          else
+            if IsPartBeingMoved and t == 4 then
+              newpart = selection
+            end
+          end
+          if newpart then
+            SelectBox.Parent = Player.PlayerGui
+            SelectBox.Adornee = newpart
+
+            Handles.Adornee = newpart
+            Handles.Parent = Player.PlayerGui
+            Handles.Style = Enum.HandlesStyle.Movement
+
+            local AxisMultipliers = {
+              [Enum.NormalId.Top] = Vector3.new(0, 1, 0);
+              [Enum.NormalId.Bottom] = Vector3.new(0, -1, 0);
+              [Enum.NormalId.Front] = Vector3.new(0, 0, -1);
+              [Enum.NormalId.Back] = Vector3.new(0, 0, 1);
+              [Enum.NormalId.Left] = Vector3.new(-1, 0, 0);
+              [Enum.NormalId.Right] = Vector3.new(1, 0, 0);
+            }
+
+            MinX, MinY, MinZ = Handles.Adornee.Position.X, Handles.Adornee.Position.Y, Handles.Adornee.Position.Z;
+            MaxX, MaxY, MaxZ = Handles.Adornee.Position.X, Handles.Adornee.Position.Y, Handles.Adornee.Position.Z;
+
+            Handles.MouseButton1Down:Connect(function()
+            Handles.MouseDrag:Connect(function(face,dist)
+            Handles.Adornee.CFrame = CFrame.new(
+            MinX + (MaxX - MinX) / 2,
+            MinY + (MaxY - MinY) / 2,
+            MinZ + (MaxZ - MinZ) / 2
+            ) + (AxisMultipliers[face] * dist)
+            end)
+            end)
+
+            Handles.MouseButton1Up:Connect(function()
+            MinX, MinY, MinZ = Handles.Adornee.Position.X, Handles.Adornee.Position.Y, Handles.Adornee.Position.Z;
+            MaxX, MaxY, MaxZ = Handles.Adornee.Position.X, Handles.Adornee.Position.Y, Handles.Adornee.Position.Z;
+            end)
+          end
+        end
+        end)
+
+        Move.Unequipped:Connect(function()
+        if MACon then
+          MACon:Disconnect()
+        end
+        Handles.Parent = Player
+        SelectBox.Parent = Player
+        end)
+        end)
+
+        local DACon
+
+        Delete.Equipped:Connect(function()
+        DACon = Delete.Activated:Connect(function()
+        selection = Mouse.Target
+        if selection and selection:IsA("Part") and not IsDescendantOfPlayer(selection) then
+          if IsInTable(selection, BtoolsParts.Deleted)  then
+            print("This part is already being deleted. Use undo tool to undo")
+          else
+            if string.find(selection.Name, "(Clone)") then
+              local b = selection.Name:gsub(" (Clone)","")
+              local n
+              for i,v in pairs(workspace:GetDescendants()) do
+                if v.Name == b then
+                  n = v
+                end
+              end
+              BtoolsParts.Moved[n] = nil
+              selection:Destroy()
+            elseif IsInTable(selection, BtoolsParts.Moved) and not string.find(selection.Name, "(Clone)") then
+              print("This part is being moved, undo using the undo tool then try destroying!")
+            elseif not IsInTable(selection, BtoolsParts.Moved) and not IsInTable(selection, BtoolsParts.Deleted)  then
+              BtoolsParts.Colors[selection.Name] = selection.BrickColor
+              selection.BrickColor = BrickColor.Red()
+              table.insert(BtoolsParts.Deleted, selection)
+            end
+          end
+        end
+        end)
+        end)
+
+        Delete.Unequipped:Connect(function()
+        if DACon then
+          DACon:Disconnect()
+        end
+        end)
+
+        local RACon
+        local increment = 1
+        local ArcMD
+        local ArcU
+        local ArcD
+
+        local function round(number,by)
+          return math.floor((number/by)+0.5) * by
+        end
+
+        local function AngleFromAxis(axis,rA)
+          rA = math.rad(round(math.deg(rA),increment))
+          return axis==Enum.Axis.X and {rA,0,0}
+          or axis==Enum.Axis.Y and {0,rA,0}
+          or axis==Enum.Axis.Z and {0,0,rA}
+        end
+
+        Rotate.Equipped:Connect(function()
+
+        Lasso.Humanoid = Player.Character.Humanoid
+        Lasso.Parent = Player.PlayerGui
+        Lasso.Color = BrickColor.new("Bright blue")
+
+        ArcHandle.Parent = Player.PlayerGui
+        ArcHandle.Color = BrickColor.new("Bright orange")
+
+        SelectBox.Parent = Player.PlayerGui
+        SelectBox.Color = BrickColor.new("Bright blue")
+        if Lasso.Part then
+          ArcHandle.Adornee = Lasso.Part
+          SelectBox.Adornee = Lasso.Part
+
+          ArcD = ArcHandle.MouseButton1Down:connect(function(axis)
+          if Lasso.Part then
+            lastCFrame = Lasso.Part.CFrame
+            --ArcHandle.Axes = Axes.new(axis)
+          end
+          end)
+
+          ArcMD = ArcHandle.MouseDrag:connect(function(axis, relativeAngle)
+          if Lasso.Part then
+            Lasso.Part.CFrame = lastCFrame * CFrame.Angles(unpack(AngleFromAxis(axis,relativeAngle)))
+          end
+          end)
+
+          ArcU = ArcHandle.MouseButton1Up:Connect(function(axis, relativeAngle)
+          lastCFrame = Lasso.Part.CFrame
+          end)
+
+          RACon = Rotate.Activated:Connect(function()
+          local lastCFrame
+          selection = Mouse.Target
+          if selection and selection:IsA("Part") and not IsDescendantOfPlayer(selection) and selection ~= Handles then
+            local newpart
+            local IsPartBeingMoved,t = IsBeingMoved(selection)
+            if not IsPartBeingMoved then
+              newpart = selection:Clone()
+              newpart.CanCollide = false
+              newpart.Parent = workspace
+              newpart.Transparency = 0.5
+              newpart.Name = newpart.Name .. " (Clone)"
+              BtoolsParts.Moved[selection] = {
+                ClonePart = newpart,
+                Part = selection
+              }
+            else
+              if IsPartBeingMoved and t == 4 then
+                newpart = selection
+              end
+            end
+            if newpart then
+              Lasso.Part = newpart
+              ArcHandle.Adornee = Lasso.Part
+              SelectBox.Adornee = Lasso.Part
+
+              ArcD = ArcHandle.MouseButton1Down:connect(function(axis)
+              if Lasso.Part then
+                lastCFrame = Lasso.Part.CFrame
+                --ArcHandle.Axes = Axes.new(axis)
+              end
+              end)
+
+              ArcMD = ArcHandle.MouseDrag:connect(function(axis, relativeAngle)
+              if Lasso.Part then
+                Lasso.Part.CFrame = lastCFrame * CFrame.Angles(unpack(AngleFromAxis(axis,relativeAngle)))
+              end
+              end)
+
+              ArcU = ArcHandle.MouseButton1Up:Connect(function(axis, relativeAngle)
+              lastCFrame = Lasso.Part.CFrame
+              end)
+            end
+          end
+          end)
+        else
+          RACon = Rotate.Activated:Connect(function()
+          local lastCFrame
+          selection = Mouse.Target
+          if selection and selection:IsA("Part") and not IsDescendantOfPlayer(selection) and selection ~= Handles then
+            local newpart
+            local IsPartBeingMoved,t = IsBeingMoved(selection)
+            if not IsPartBeingMoved then
+              newpart = selection:Clone()
+              newpart.CanCollide = false
+              newpart.Parent = workspace
+              newpart.Transparency = 0.5
+              newpart.Name = newpart.Name .. " (Clone)"
+              BtoolsParts.Moved[selection] = {
+                ClonePart = newpart,
+                Part = selection
+              }
+            else
+              if IsPartBeingMoved and t == 4 then
+                newpart = selection
+              end
+            end
+            if newpart then
+              Lasso.Part = newpart
+              ArcHandle.Adornee = Lasso.Part
+              SelectBox.Adornee = Lasso.Part
+
+              ArcD = ArcHandle.MouseButton1Down:connect(function(axis)
+              if Lasso.Part then
+                lastCFrame = Lasso.Part.CFrame
+              end
+              end)
+
+              ArcMD = ArcHandle.MouseDrag:connect(function(axis, relativeAngle)
+              if Lasso.Part then
+                Lasso.Part.CFrame = lastCFrame * CFrame.Angles(unpack(AngleFromAxis(axis,relativeAngle)))
+              end
+              end)
+
+              ArcU = ArcHandle.MouseButton1Up:Connect(function(axis, relativeAngle)
+              lastCFrame = Lasso.Part.CFrame
+              end)
+            end
+          end
+          end)
+        end
+        end)
+
+        Rotate.Unequipped:Connect(function()
+        Lasso.Parent = Player
+        ArcHandle.Parent = Player
+        SelectBox.Parent = Player
+        if RACon then
+          RACon:Disconnect()
+        end
+        if ArcD then
+          ArcD:Disconnect()
+        end
+        if ArcU then
+          ArcU:Disconnect()
+        end
+        if ArcMD then
+          ArcMD:Disconnect()
+        end
+        end)
+
+        local UNCon
+
+        Undo.Equipped:Connect(function()
+        UNCon = Undo.Activated:Connect(function()
+        local selection = Mouse.Target
+        if selection and selection:IsA("Part") and not IsDescendantOfPlayer(selection) then
+          if IsInTable(selection, BtoolsParts.Deleted) then
+            selection.BrickColor = BtoolsParts.Colors[selection.Name]
+            table.remove(BtoolsParts.Deleted, table.find(BtoolsParts.Deleted, selection))
+          else
+            if string.find(selection.Name, "(Clone)") then
+              local b = selection.Name:gsub(" (Clone)","")
+              local n
+              for i,v in pairs(workspace:GetDescendants()) do
+                if v.Name == b then
+                  n = v
+                end
+              end
+              BtoolsParts.Moved[n] = nil
+              selection:Destroy()
+            elseif IsInTable(selection, BtoolsParts.Moved) and not string.find(selection.Name, "(Clone)") then
+              BtoolsParts.Moved[selection] = nil
+              workspace[selection["ClonePart"].Name]:Destroy()
+            elseif not IsInTable(selection, BtoolsParts.Moved) and not IsInTable(selection, BtoolsParts.Deleted) then
+              if ogcframes[selection.Name] then
+                if movestatus == true then return end
+                if allclear() == false then return end
+                for _,v in pairs(game.Workspace:GetDescendants()) do
+                  if v:IsA("Part") then
+                    v.CanCollide = false
+                  end
+                end
+
+                moveobject(selection, 2)
+                repeat task.wait() until movestatus == false
+                  workspace.Gravity = 198.2
+                  for _,v in pairs(game.Workspace:GetDescendants()) do
+                    if v:IsA("Part") then
+                      v.CanCollide = true
+                    end
+                  end
+                  act("reset me")
+                end
+              end
+            end
+          end
+          end)
+          end)
+
+          Undo.Unequipped:Connect(function()
+          if UNCon then
+            UNCon:Disconnect()
+          end
+          end)
+
+          local function lenTbl(tbl)
+            local num = 0
+            for i,v in next, tbl do
+              num += 1
+            end
+            return num
+          end
+
+          Finish.Equipped:Connect(function()
+          COCon = Finish.Activated:Connect(function()
+          if lenTbl(BtoolsParts.Moved) > 0 or lenTbl(BtoolsParts.Deleted) > 0 then
+            for i,v in pairs(Player.Backpack:GetChildren()) do
+              if v.Name ~= "Finish" then
+                v:Destroy()
+              end
+            end
+            for _,v in pairs(game.Workspace:GetDescendants()) do
+              if v:IsA("Part") then
+                v.CanCollide = false
+              end
+            end
+
+            for i,v in pairs(BtoolsParts.Moved) do
+              --pcall(function()
+              if v then
+                print('mhm')
+                btoolsmove(v["Part"], v["ClonePart"])
+                repeat task.wait() until movestatus == false
+                  act("reset me")
+                  local g,c = pcall(function()
+                  if v then
+                    workspace[v["ClonePart"].Name]:Destroy()
+                    BtoolsParts.Moved[v["Part"]] = nil
+                  end
+                  end)
+
+                  if not g then
+                    print(c)
+                  end
+
+                end
+                --end)
+
+              end
+              repeat task.wait() until movestatus == false
+                for i,v in pairs(BtoolsParts.Deleted) do
+                  pcall(function()
+                  if v then
+                    moveobject(v, 1)
+                    repeat task.wait() until movestatus == false
+                      act("reset me")
+
+                      table.remove(BtoolsParts.Deleted, table.find(BtoolsParts.Deleted, v))
+                    end
+                    end)
+                  end
+                  repeat task.wait() until movestatus == false
+                    COCon:Disconnect()
+
+                    workspace.Gravity = 198.6
+                    for _,v in pairs(workspace:GetDescendants()) do
+                      if v:IsA("Part") then
+                        v.CanCollide = true
+                      end
+                    end
+                  else
+                    print("Move around some parts first!")
+                  end
+                  end)
+                  end)
+
+                  Finish.Unequipped:Connect(function()
+                  if COCon then
+                    COCon:Disconnect()
+                  end
+                  end)
+
+                  local ClearTables = Instance.new("Tool", Player.Backpack)
+                  ClearTables.Name = "Clear"
+                  ClearTables.RequiresHandle = false
+
+                  local CAD
+
+                  ClearTables.Equipped:Connect(function()
+                  CAD = ClearTables.Activated:Connect(function()
+                  BtoolsParts.Moved = {}
+                  BtoolsParts.Deleted = {}
+                  for i,v in pairs(workspace:GetDescendants()) do
+                    if table.find(BtoolsParts.Colors, v) then
+                      v.BrickColor = BtoolsParts.Colors[v]
+                    end
+                  end
+                  BtoolsParts.Colors = {}
+                  for i,v in pairs(workspace:GetChildren()) do
+                    if string.find(v.Name, "(Clone)") then
+                      v:Destroy()
+                    end
+                  end
+                  print("BTOOLSv2 tables and parts cleared!")
+                  CAD:Disconnect()
+                  end)
+                  end)
+
+
+                  end)()
